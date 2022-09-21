@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import models.*;
 
 public class Main {
+    static Store store = new Store();
 
     public static void main(String[] args) {
 
@@ -13,8 +18,6 @@ public class Main {
                 { new Item("Shirt", 12.99), new Item("Pants", 24.99), new Item("Sweater", 18.99) },
                 { new Item("Phone", 549.99), new Item("Printer", 349.99), new Item("Television", 1099) }
         };
-
-        Store store = new Store();
 
         for (int i = 0; i < inventory.length; i++) {
             for (int j = 0; j < inventory[i].length; j++) {
@@ -58,4 +61,17 @@ public class Main {
      *                               field.
      */
 
+     public static void loadItems(String fileName) throws FileNotFoundException{
+        File file = new File(fileName);
+        Scanner scan = new Scanner(file);
+       for(int i = 0; scan.hasNextLine(); i++){
+            String line = scan.nextLine();
+            String[] drink = line.split(";");
+            for (int j = 0; j < drink.length; j++) {
+                String[] fileds = drink[j].split("=");
+                store.setItem(i, j, new Item(fileds[0], Double.parseDouble(fileds[1])));
+            }
+        }
+        scan.close();
+     }
 }
