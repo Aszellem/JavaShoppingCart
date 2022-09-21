@@ -46,6 +46,9 @@ public class Cart {
      */
 
     public void remove(Item name) {
+        if(items.isEmpty()){
+            throw new IllegalStateException("Cannot remove items from an empty cart");
+        }
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(name)) {
                 items.remove(i);
@@ -66,6 +69,9 @@ public class Cart {
      */
 
      public String checkOut(){
+        if(items.isEmpty()){
+            throw new IllegalStateException("Cannot remove items from an empty cart");
+        }
         double [] measures = new double[3];
         for (int i = 0; i < items.size(); i++) {
             measures[0] = items.get(i).getPrice();
