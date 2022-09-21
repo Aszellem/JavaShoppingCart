@@ -45,7 +45,7 @@ public class Cart {
      *             1. Removes the item that matches the name passed in.
      */
 
-    public void remove(Item name) {
+    public void remove(String name) {
         if(items.isEmpty()){
             throw new IllegalStateException("Cannot remove items from an empty cart");
         }
@@ -54,6 +54,10 @@ public class Cart {
                 items.remove(i);
             }
         }
+    }
+
+    public boolean isEmpty(){
+        return items.isEmpty();
     }
 
     /**
